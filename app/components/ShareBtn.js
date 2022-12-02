@@ -22,13 +22,10 @@ export default memo(function ShareBtn(props) {
   }
 
   return (
-    <>
-      { navigator?.share ? (
-        <button className={`${styles.shareBtn} text-center text-center`} onClick={handleShare}>
-          <i className="far fa-share-square fa-fw fa-1x me-1"></i>
-          Share code
-        </button>
-      ) : null} 
-    </>
+    // globalThis.navigator?.canShare()
+    <button className={`${styles.shareBtn} text-center text-center`} onClick={handleShare}>
+      <i className="far fa-share-square fa-fw fa-1x me-1"></i>
+      Share code
+    </button>
   );
 })
