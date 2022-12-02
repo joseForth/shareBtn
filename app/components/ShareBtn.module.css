@@ -1,0 +1,29 @@
+.shareBtn {
+  position: relative;
+  background-color: transparent;
+  border: none;
+  width: fit-content;
+  color: var(--primary-color);
+}
+
+.shareBtn:hover{
+  color: var(--primary-color-hover);
+}
+
+.shareBtn::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: -3px;
+  left: 0;
+  background-color: var(--primary-color-hover);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.shareBtn:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
