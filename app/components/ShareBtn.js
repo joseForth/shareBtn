@@ -21,7 +21,7 @@ export default memo(function ShareBtn(props) {
     }
   }
 
-  console.log("canShare", globalThis.navigator?.canShare())
+  // console.log("canShare", globalThis.navigator?.canShare())
   return (
     // globalThis.navigator?.canShare()
     <button className={`${styles.shareBtn} text-center text-center`} onClick={handleShare}>
