@@ -4,12 +4,15 @@ import React, { memo, useState, useEffect } from 'react'
 import styles from './ShareBtn.module.css'
 import RenderIf from './RenderIf'
 
+import {FacebookShareButton, FacebookIcon, TwitterShareButton, WhatsappShareButton, TwitterIcon, WhatsappIcon, EmailShareButton, EmailIcon, LinkedinShareButton, LinkedinIcon} from 'react-share'
+
 export default memo(function ShareBtn(props) {
   const {children: text, content} = props
   const [errorMessage, setErrorMessage] = useState("")
   let canShare = false
   useEffect( async () => {
     canShare = await navigator.share() || false
+    console.log(canShare)
   }, [])
   
   const handleCopy = async () => {
