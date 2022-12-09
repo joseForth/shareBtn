@@ -20,9 +20,8 @@ export const ShareBtn = (props) => {
   const handleCopy = async () => {
     if(errorMessage) return
 
-    setShowCopyAlert(true)
     await navigator?.clipboard?.writeText("XXXX-XXXX-XXXX")
-    setTimeout(() => setShowCopyAlert(false), 3000)
+    console.log("Copied!")
   }
 
   const getWebsiteUrl = (websiteId = 1) => {
@@ -50,15 +49,15 @@ export const ShareBtn = (props) => {
     //   setTimeout(() => setErrorMessage(""), 4000)
     // }
 
-    if (navigator.canShare) {
-      navigator.share(shareData)
-      .then(() => console.log('Share was successful.'))
-      .catch((error) => console.log('Sharing failed', error));
-    } else {
-      setErrorMessage("Your browser is not compatible with this function")
-      setTimeout(() => setErrorMessage(""), 4000)
-      console.log(`Your system doesn't support sharing files.`);
-    }
+    // if (navigator.canShare) {
+    //   navigator.share(shareData)
+    //   .then(() => console.log('Share was successful.'))
+    //   .catch((error) => console.log('Sharing failed', error));
+    // } else {
+    //   setErrorMessage("Your browser is not compatible with this function")
+    //   setTimeout(() => setErrorMessage(""), 4000)
+    //   console.log(`Your system doesn't support sharing files.`);
+    // }
   }
 
   return (
@@ -137,7 +136,7 @@ export const ShareBtn = (props) => {
           Share code native
         </button>
       </RenderIf>
-
+      <p>canShare: {canShare}</p>
       <RenderIf isTrue={errorMessage != ""}>
         <div className={`${styles.alert} ${styles.danger} pt-3`}>
           {errorMessage}
