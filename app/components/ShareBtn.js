@@ -6,15 +6,16 @@ import RenderIf from './RenderIf'
 
 import {FacebookShareButton, FacebookIcon, TwitterShareButton, WhatsappShareButton, TwitterIcon, WhatsappIcon, EmailShareButton, EmailIcon, LinkedinShareButton, LinkedinIcon} from 'react-share'
 
-export default memo(function ShareBtn(props) {
+export const ShareBtn = async (props) => {
   const {title, content} = props
   const [errorMessage, setErrorMessage] = useState("")
-  let canShare = false
+  const [canShare, setCanShare] = useState(false)
+
 
   useEffect( async () => {
-    canShare = await navigator.canShare || false
     console.log({canShare})
-  })
+    if(navigator.canShare) setCanShare(navigator.canShare)
+  },[await navigator])
   
   const handleCopy = async () => {
     if(errorMessage) return
