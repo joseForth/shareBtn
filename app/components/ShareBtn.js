@@ -6,7 +6,7 @@ import RenderIf from './RenderIf'
 
 import {FacebookShareButton, FacebookIcon, TwitterShareButton, WhatsappShareButton, TwitterIcon, WhatsappIcon, EmailShareButton, EmailIcon, LinkedinShareButton, LinkedinIcon} from 'react-share'
 
-export const ShareBtn = async (props) => {
+export const ShareBtn = (props) => {
   const {title, content} = props
   const [errorMessage, setErrorMessage] = useState("")
   const [canShare, setCanShare] = useState(false)
