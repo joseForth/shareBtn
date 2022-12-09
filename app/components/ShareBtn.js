@@ -145,4 +145,4 @@ export const ShareBtn = async (props) => {
       </RenderIf>
     </>
   );
-})
+}
