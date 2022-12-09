@@ -13,9 +13,9 @@ export const ShareBtn = async (props) => {
 
 
   useEffect( async () => {
+    if(navigator?.canShare) setCanShare(navigator.canShare)
     console.log({canShare})
-    if(navigator.canShare) setCanShare(navigator.canShare)
-  },[await navigator])
+  })
   
   const handleCopy = async () => {
     if(errorMessage) return
