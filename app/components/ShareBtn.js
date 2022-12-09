@@ -43,8 +43,6 @@ export default memo(function ShareBtn(props) {
 
   }
 
-  console.log(window, navigator)
-
   return (
     <>
       <RenderIf isTrue={navigator?.share == undefined}>
