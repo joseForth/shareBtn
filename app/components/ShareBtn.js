@@ -8,11 +8,11 @@ export default memo(function ShareBtn(props) {
   const {children: text, content} = props
   const [errorMessage, setErrorMessage] = useState("")
   
-  const handleCopy = () => {
+  const handleCopy = async () => {
     if(errorMessage) return
 
     setShowCopyAlert(true)
-    navigator.clipboard.writeText("XXXX-XXXX-XXXX")
+    await navigator?.clipboard?.writeText("XXXX-XXXX-XXXX")
     setTimeout(() => setShowCopyAlert(false), 3000)
   }
 
@@ -33,7 +33,7 @@ export default memo(function ShareBtn(props) {
     }
 
     try {
-      await navigator.share(shareData)
+      await navigator?.share(shareData)
       console.info('shared successfully')
     } catch (err) {
       console.error(err)
@@ -42,6 +42,8 @@ export default memo(function ShareBtn(props) {
     }
 
   }
+
+  console.log(window, navigator)
 
   return (
     <>
