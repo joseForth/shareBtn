@@ -12,7 +12,7 @@ export default memo(function ShareBtn(props) {
   let canShare = false
 
   useLayoutEffect( async () => {
-    canShare = await navigator.canShare || false
+    canShare = await navigator.canShare
     console.log({canShare})
   }, [])
   
