@@ -10,7 +10,7 @@ export default memo(function ShareBtn(props) {
   let canShare = false
   useEffect( async () => {
     canShare = await navigator.share() || false
-  }, [window])
+  }, [])
   
   const handleCopy = async () => {
     if(errorMessage) return
