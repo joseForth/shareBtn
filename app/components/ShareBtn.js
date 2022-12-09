@@ -7,12 +7,12 @@ import RenderIf from './RenderIf'
 import {FacebookShareButton, FacebookIcon, TwitterShareButton, WhatsappShareButton, TwitterIcon, WhatsappIcon, EmailShareButton, EmailIcon, LinkedinShareButton, LinkedinIcon} from 'react-share'
 
 export default memo(function ShareBtn(props) {
-  const {children: text, content} = props
+  const {title, content} = props
   const [errorMessage, setErrorMessage] = useState("")
   let canShare = false
 
   useEffect( async () => {
-    canShare = await navigator.canShare() || false
+    canShare = await navigator.canShare || false
     console.log({canShare})
   }, [])
   
@@ -36,19 +36,28 @@ export default memo(function ShareBtn(props) {
   const handleShare = async () => {
     const shareData = {
       title,
-      text,
-      url,
+      text: content,
+      url: getWebsiteUrl(),
     }
 
-    try {
-      await navigator.share(shareData)
-      console.info('shared successfully')
-    } catch (err) {
-      console.error(err)
+    // try {
+    //   await navigator.share(shareData)
+    //   console.info('shared successfully')
+    // } catch (err) {
+    //   console.error(err)
+    //   setErrorMessage("Your browser is not compatible with this function")
+    //   setTimeout(() => setErrorMessage(""), 4000)
+    // }
+
+    if (navigator.canShare) {
+      navigator.share(shareData)
+      .then(() => console.log('Share was successful.'))
+      .catch((error) => console.log('Sharing failed', error));
+    } else {
       setErrorMessage("Your browser is not compatible with this function")
       setTimeout(() => setErrorMessage(""), 4000)
+      console.log(`Your system doesn't support sharing files.`);
     }
-    console.log(navigator)
   }
 
   return (

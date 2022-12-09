@@ -17,7 +17,7 @@ export default function Home() {
     <div className={styles.container}>
       <main className={styles.main}>
         <div className={styles.grid}>
-          <ShareBtn content={`Try out Forth and get £10 off your first test on me when you use my referral code: XXXX-XXXX-XXXX during purchase. To view what tests might be right for you, visit`}/>
+          <ShareBtn title="Referral code" content={`Try out Forth and get £10 off your first test on me when you use my referral code: XXXX-XXXX-XXXX during purchase. To view what tests might be right for you, visit`}/>
         </div>
       </main>
 
