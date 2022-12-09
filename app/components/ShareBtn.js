@@ -62,7 +62,7 @@ export default memo(function ShareBtn(props) {
 
   return (
     <>
-      <RenderIf isTrue={!navigator.canShare}>
+      <RenderIf isTrue={!navigator?.canShare}>
         <div className="dropdown">
           <button className={`${styles.shareBtn} text-center dropdown-toggle`} type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
             <i className="far fa-share-square fa-fw fa-1x me-1"></i>
@@ -130,7 +130,7 @@ export default memo(function ShareBtn(props) {
         </div>
       </RenderIf>
 
-      <RenderIf isTrue={navigator.canShare}>
+      <RenderIf isTrue={navigator?.canShare}>
         <button className={`${styles.shareBtn} text-center text-center`} onClick={handleShare}>
           <i className="far fa-share-square fa-fw fa-1x me-1"></i>
           Share code native
