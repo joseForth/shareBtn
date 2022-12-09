@@ -15,6 +15,15 @@ export default memo(function ShareBtn(props) {
     canShare = await navigator.canShare
     console.log({canShare})
   }, [])
+
+
+  const canUseShareAPI = () => {
+    if(navigator.canShare){
+      return true
+    }
+
+    return false
+  }
   
   const handleCopy = async () => {
     if(errorMessage) return
@@ -135,7 +144,7 @@ export default memo(function ShareBtn(props) {
         <i className="far fa-share-square fa-fw fa-1x me-1"></i>
         Share code native
       </button>
-      <p>canShare: {canShare?.toString()}</p>
+      <p>canShare: {canUseShareAPI()?.toString()}</p>
       <RenderIf isTrue={errorMessage != ""}>
         <div className={`${styles.alert} ${styles.danger} pt-3`}>
           {errorMessage}
