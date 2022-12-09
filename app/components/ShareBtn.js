@@ -49,15 +49,15 @@ export const ShareBtn = (props) => {
     //   setTimeout(() => setErrorMessage(""), 4000)
     // }
 
-    // if (navigator.canShare) {
-    //   navigator.share(shareData)
-    //   .then(() => console.log('Share was successful.'))
-    //   .catch((error) => console.log('Sharing failed', error));
-    // } else {
-    //   setErrorMessage("Your browser is not compatible with this function")
-    //   setTimeout(() => setErrorMessage(""), 4000)
-    //   console.log(`Your system doesn't support sharing files.`);
-    // }
+    if (navigator.canShare) {
+      navigator.share(shareData)
+      .then(() => console.log('Share was successful.'))
+      .catch((error) => console.log('Sharing failed', error));
+    } else {
+      setErrorMessage("Your browser is not compatible with this function")
+      setTimeout(() => setErrorMessage(""), 4000)
+      console.log(`Your system doesn't support sharing files.`);
+    }
   }
 
   return (
@@ -131,12 +131,12 @@ export const ShareBtn = (props) => {
       </RenderIf>
 
       <RenderIf isTrue={canShare}>
+      </RenderIf>
         <button className={`${styles.shareBtn} text-center text-center`} onClick={handleShare}>
           <i className="far fa-share-square fa-fw fa-1x me-1"></i>
           Share code native
         </button>
-      </RenderIf>
-      <p>canShare: {canShare}</p>
+      <p>canShare: {canShare?.toString()}</p>
       <RenderIf isTrue={errorMessage != ""}>
         <div className={`${styles.alert} ${styles.danger} pt-3`}>
           {errorMessage}
