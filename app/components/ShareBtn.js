@@ -41,14 +41,14 @@ export default memo(function ShareBtn(props) {
     }
 
     try {
-      await navigator?.share(shareData)
+      await navigator.share(shareData)
       console.info('shared successfully')
     } catch (err) {
       console.error(err)
       setErrorMessage("Your browser is not compatible with this function")
       setTimeout(() => setErrorMessage(""), 4000)
     }
-
+    console.log(navigator)
   }
 
   return (
