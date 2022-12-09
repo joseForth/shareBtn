@@ -6,24 +6,22 @@ import RenderIf from './RenderIf'
 
 import {FacebookShareButton, FacebookIcon, TwitterShareButton, WhatsappShareButton, TwitterIcon, WhatsappIcon, EmailShareButton, EmailIcon, LinkedinShareButton, LinkedinIcon} from 'react-share'
 
-export const ShareBtn = (props) => {
+export default memo(function ShareBtn(props) {
   const {title, content} = props
   const [errorMessage, setErrorMessage] = useState("")
-  const [canShare, setCanShare] = useState(false)
+  let canShare = false
 
-
-  useEffect(() => {
-    if(navigator?.canShare) {
-      setCanShare(navigator.canShare)
-    }
-    console.log("canShare", canShare)
-  })
+  useEffect( async () => {
+    canShare = await navigator.canShare || false
+    console.log({canShare})
+  }, [])
   
   const handleCopy = async () => {
     if(errorMessage) return
 
+    setShowCopyAlert(true)
     await navigator?.clipboard?.writeText("XXXX-XXXX-XXXX")
-    console.log("Copied!")
+    setTimeout(() => setShowCopyAlert(false), 3000)
   }
 
   const getWebsiteUrl = (websiteId = 1) => {
@@ -42,24 +40,24 @@ export const ShareBtn = (props) => {
       url: getWebsiteUrl(),
     }
 
-    // try {
-    //   await navigator.share(shareData)
-    //   console.info('shared successfully')
-    // } catch (err) {
-    //   console.error(err)
-    //   setErrorMessage("Your browser is not compatible with this function")
-    //   setTimeout(() => setErrorMessage(""), 4000)
-    // }
-
-    if (navigator.canShare) {
-      navigator.share(shareData)
-      .then(() => console.log('Share was successful.'))
-      .catch((error) => console.log('Sharing failed', error));
-    } else {
+    try {
+      await navigator.share(shareData)
+      console.info('shared successfully')
+    } catch (err) {
+      console.error(err)
       setErrorMessage("Your browser is not compatible with this function")
       setTimeout(() => setErrorMessage(""), 4000)
-      console.log(`Your system doesn't support sharing files.`);
     }
+
+    // if (navigator.canShare) {
+    //   navigator.share(shareData)
+    //   .then(() => console.log('Share was successful.'))
+    //   .catch((error) => console.log('Sharing failed', error));
+    // } else {
+    //   setErrorMessage("Your browser is not compatible with this function")
+    //   setTimeout(() => setErrorMessage(""), 4000)
+    //   console.log(`Your system doesn't support sharing files.`);
+    // }
   }
 
   return (
@@ -132,13 +130,12 @@ export const ShareBtn = (props) => {
         </div>
       </RenderIf>
 
-      <RenderIf isTrue={canShare}>
-      </RenderIf>
-        <button className={`${styles.shareBtn} text-center text-center`} onClick={handleShare}>
-          <i className="far fa-share-square fa-fw fa-1x me-1"></i>
-          Share code native
-        </button>
-      <p>canShare: {canShare?.toString()}</p>
+
+      <button className={`${styles.shareBtn} text-center text-center`} onClick={handleShare}>
+        <i className="far fa-share-square fa-fw fa-1x me-1"></i>
+        Share code native
+      </button>
+
       <RenderIf isTrue={errorMessage != ""}>
         <div className={`${styles.alert} ${styles.danger} pt-3`}>
           {errorMessage}
@@ -146,4 +143,4 @@ export const ShareBtn = (props) => {
       </RenderIf>
     </>
   );
-}
+})
