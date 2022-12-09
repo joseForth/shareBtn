@@ -1,6 +1,6 @@
 'use client'
 
-import React, { memo, useState, useEffect } from 'react'
+import React, { memo, useState, useEffect, useLayoutEffect } from 'react'
 import styles from './ShareBtn.module.css'
 import RenderIf from './RenderIf'
 
@@ -11,7 +11,7 @@ export default memo(function ShareBtn(props) {
   const [errorMessage, setErrorMessage] = useState("")
   let canShare = false
 
-  useEffect( async () => {
+  useLayoutEffect( async () => {
     canShare = await navigator.canShare || false
     console.log({canShare})
   }, [])
@@ -135,7 +135,7 @@ export default memo(function ShareBtn(props) {
         <i className="far fa-share-square fa-fw fa-1x me-1"></i>
         Share code native
       </button>
-      <p>canShare: {navigator?.canShare?.toString()}</p>
+      <p>canShare: {canShare?.toString()}</p>
       <RenderIf isTrue={errorMessage != ""}>
         <div className={`${styles.alert} ${styles.danger} pt-3`}>
           {errorMessage}
