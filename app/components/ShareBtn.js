@@ -10,7 +10,7 @@ export default memo(function ShareBtn(props) {
   const {children: text, content} = props
   const [errorMessage, setErrorMessage] = useState("")
   let canShare = false
-  
+
   useEffect( async () => {
     canShare = await navigator.canShare() || false
     console.log({canShare})
@@ -121,12 +121,11 @@ export default memo(function ShareBtn(props) {
         </div>
       </RenderIf>
 
-      <RenderIf isTrue={canShare}>
-        <button className={`${styles.shareBtn} text-center text-center`} onClick={handleShare}>
-          <i className="far fa-share-square fa-fw fa-1x me-1"></i>
-          Share code
-        </button>
-      </RenderIf>
+
+      <button className={`${styles.shareBtn} text-center text-center`} onClick={handleShare}>
+        <i className="far fa-share-square fa-fw fa-1x me-1"></i>
+        Share code native
+      </button>
 
       <RenderIf isTrue={errorMessage != ""}>
         <div className={`${styles.alert} ${styles.danger} pt-3`}>
