@@ -12,8 +12,17 @@ export default memo(function ShareBtn(props) {
     if(errorMessage) return
 
     setShowCopyAlert(true)
-    window.navigator.clipboard.writeText("XXXX-XXXX-XXXX")
+    navigator.clipboard.writeText("XXXX-XXXX-XXXX")
     setTimeout(() => setShowCopyAlert(false), 3000)
+  }
+
+  const getWebsiteUrl = (websiteId = 1) => {
+    const websiteList = {
+      1: "https://www.forthwithlife.co.uk",
+      2: "https://www.forthedge.co.uk"
+    }
+
+    return websiteList[websiteId]
   }
   
   const handleShare = async () => {
@@ -36,7 +45,7 @@ export default memo(function ShareBtn(props) {
 
   return (
     <>
-      <RenderIf isTrue={window.navigator?.share == undefined}>
+      <RenderIf isTrue={navigator?.share == undefined}>
         <div className="dropdown">
           <button className={`${styles.shareBtn} text-center dropdown-toggle`} type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
             <i className="far fa-share-square fa-fw fa-1x me-1"></i>
@@ -104,7 +113,7 @@ export default memo(function ShareBtn(props) {
         </div>
       </RenderIf>
 
-      <RenderIf isTrue={window.navigator?.share != undefined}>
+      <RenderIf isTrue={navigator?.share != undefined}>
         <button className={`${styles.shareBtn} text-center text-center`} onClick={handleShare}>
           <i className="far fa-share-square fa-fw fa-1x me-1"></i>
           Share code
