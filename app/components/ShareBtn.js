@@ -1,13 +1,13 @@
 'use client'
 
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import styles from './ShareBtn.module.css'
-import forthLogo from './forthGradientIcon.png'
 import RenderIf from './RenderIf'
 
 export default memo(function ShareBtn(props) {
   const {children: text, content} = props
-
+  const [errorMessage, setErrorMessage] = useState("")
+  
   const handleCopy = () => {
     if(errorMessage) return
 
@@ -55,7 +55,7 @@ export default memo(function ShareBtn(props) {
           <ul className={`dropdown-menu ${styles.dropdownMenu}`} aria-labelledby="dropdownMenuButton1">
             <li className="dropdown-item">
               <FacebookShareButton
-                url={getWebsiteUrl(global.config.websiteId)}
+                url={getWebsiteUrl(1)}
                 quote={"EXAMPLE TEXT"}
                 data-text={"EXAMPLE TEXT"}
                 hashtag={"#forth"}
@@ -67,7 +67,7 @@ export default memo(function ShareBtn(props) {
             </li>
             <li className="dropdown-item">
               <TwitterShareButton
-                url={getWebsiteUrl(global.config.websiteId)}
+                url={getWebsiteUrl(1)}
                 title={`${content}`}
                 hashtag="#forth"
                 className={styles.socialMediaButton}
@@ -78,11 +78,11 @@ export default memo(function ShareBtn(props) {
             </li>
             <li className="dropdown-item">
               <LinkedinShareButton
-                url={getWebsiteUrl(global.config.websiteId)}
+                url={getWebsiteUrl(1)}
                 title="Forth referral code"
                 summary={`${content}`}
                 description={`${content}`}
-                source={getWebsiteUrl(global.config.websiteId)}
+                source={getWebsiteUrl(1)}
                 className={styles.socialMediaButton}
               >
                 <LinkedinIcon size={25} round="true"/> 
@@ -91,7 +91,7 @@ export default memo(function ShareBtn(props) {
             </li>
             <li className="dropdown-item">
               <WhatsappShareButton
-                url={getWebsiteUrl(global.config.websiteId)}
+                url={getWebsiteUrl(1)}
                 title={`${content}`}
                 separator=" "
                 className={styles.socialMediaButton}
@@ -101,7 +101,7 @@ export default memo(function ShareBtn(props) {
               </WhatsappShareButton>
             </li>
             <li className="dropdown-item">
-              <EmailShareButton className={styles.socialMediaButton} subject='Forth referral code' body={content} url={getWebsiteUrl(global.config.websiteId)} separator=" ">
+              <EmailShareButton className={styles.socialMediaButton} subject='Forth referral code' body={content} url={getWebsiteUrl(1)} separator=" ">
                 <EmailIcon size={25} round="true"/> 
                 <p>Email</p>
               </EmailShareButton>
