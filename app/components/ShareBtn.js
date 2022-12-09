@@ -1,6 +1,6 @@
 'use client'
 
-import React, { memo, useState } from 'react'
+import React, { memo, useState, useEffect } from 'react'
 import styles from './ShareBtn.module.css'
 import RenderIf from './RenderIf'
 
